@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  align-items: center;
+  padding: 6px 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-logo {
+  width: 120px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.header-nav{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header-nav-item {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  padding: 5px 15px;
+  transition: color 0.2s;
+}
+
+.header-nav-item:hover,
+.header-nav-item.active {
+  background-color: #ff0000;
+  border-radius: 10px;
+  color: white;
+}
+
+.header-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-auth {
+  display: flex;
+  gap: 10px;
+}
+
+.header-auth button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.header-profile {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #b1b0b0;
+}
