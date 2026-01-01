@@ -1,9 +1,12 @@
 import "./MainContent.css"
+import Container from "../Container/Container";
 
 function MainContent({children}){
     return (
         <main className="main">
-            {children}
+            <Container>
+                {children}
+            </Container>
         </main>
     );
 }
