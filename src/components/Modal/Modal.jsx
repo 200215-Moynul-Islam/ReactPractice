@@ -7,6 +7,8 @@ function Modal({isOpen, onClose, className, children}) {
     const modalRoot = document.body;
     const modalRef = useRef(null);
     const previouslyFocusedElementRef = useRef(null);
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
 
     if(!isOpen) {
         return null;
@@ -19,7 +21,18 @@ function Modal({isOpen, onClose, className, children}) {
         // Move focus into the modal
         modalRef.current?.focus();
 
+        // Freeze background scroll (scrollbar will not be visible)
+        document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+
         const handleKeyDown = (event) => {
+            //Escape key closes modal
+            if(event.key === "Escape"){
+                onClose();
+                return;
+            }
+
             if (event.key !== "Tab"){
                 return;
             }
@@ -54,6 +67,11 @@ function Modal({isOpen, onClose, className, children}) {
 
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
+
+            // Restore background scroll
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+
 
             // Restore focus to previously focused element
             previouslyFocusedElementRef.current?.focus();
