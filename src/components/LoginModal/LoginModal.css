@@ -34,7 +34,11 @@
 }
 
 .eye-icon {
+    display: flex;
     cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
 }
 
 .eye-icon:hover {

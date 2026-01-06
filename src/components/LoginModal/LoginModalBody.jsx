@@ -9,7 +9,7 @@ function LoginModalBody({formValues, onChange, errors}){
     return (
         <form className="login-modal-body">
             <TextField label="Email Or Username" value={formValues.emailOrUsername} onChange = {onChange("emailOrUsername")} placeholder="name@example.com" error = {errors.emailOrUsername} rightIcon={<Mail />}/>
-            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={onChange("password")} placeholder="Password" error={errors.password} rightIcon={isPasswordVisible ? <EyeOff className="eye-icon" onClick={() => setIsPasswordVisible(false)}/> : <Eye className="eye-icon" onClick={() => setIsPasswordVisible(true)} />}/>
+            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={onChange("password")} placeholder="Password" error={errors.password} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsPasswordVisible((prev) => !prev);}}>{isPasswordVisible ? <EyeOff/> : <Eye />}</button>}/>
             <button className="login-button"><LogIn/>Log In</button>
         </form>
     );
