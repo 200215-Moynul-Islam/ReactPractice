@@ -1,5 +1,5 @@
 import React from 'react';
-import PageLayout from '../components/PageLayout/PageLayout'
+import PageLayout from '../../components/PageLayout/PageLayout'
 
 function Movies() {
   return (
