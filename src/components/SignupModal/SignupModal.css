@@ -1,17 +1,17 @@
-.login-modal {
+.signup-modal {
     padding: 32px;
     overflow-x: hidden;
     width: 420px;
 }
 
-.user-lock-icon {
+.film-icon {
     background-color: rgba(255, 0, 0, 0.1);
     /* border: 2px solid red; */
     padding: 8px;
     border-radius: 50%;
 }
 
-.login-modal-header {
+.signup-modal-header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,11 +21,11 @@
     color: #ff0000;
 }
 
-.login-modal-header-subtitle {
+.signup-modal-header-subtitle {
     font-size: small;
 }
 
-.login-modal-body {
+.signup-modal-body {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
@@ -45,7 +45,7 @@
     color: #ff0000;
 }
 
-.login-button {
+.signup-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,11 +59,11 @@
     cursor: pointer;
 }
 
-.login-button:hover {
+.signup-button:hover {
     background-color: rgb(226, 8, 8);
 }
 
-.login-modal-footer {
+.signup-modal-footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,7 +82,7 @@
     text-decoration: underline;
 }
 
-.login-modal-bottom-strip {
+.signup-modal-bottom-strip {
     position: relative;
     bottom: -32px;
     box-shadow: 32px 0 #ff0000, -32px 0 #ff0000;
