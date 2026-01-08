@@ -81,7 +81,7 @@ function Modal({isOpen, onClose, className, children}) {
     return createPortal(
         <div className="modal-backdrop" onClick={onClose}>
             <div className={`modal ${className}`} ref={modalRef} tabIndex="-1" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close-button"><X size={20} color="grey" onClick={onClose} /></button>
+                <button className="modal-close-button" onClick={onClose}><X size={20} color="grey" /></button>
                 {children}
             </div>
         </div>,
