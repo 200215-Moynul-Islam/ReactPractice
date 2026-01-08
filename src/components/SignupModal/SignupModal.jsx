@@ -5,7 +5,7 @@ import { useState } from "react";
 import SignupModalBody from "./SignupModalBody";
 import SignupModalFooter from "./SignupModalFooter"
 
-function SignupModal({isOpen, onClose, onSwitchToLogin}){
+function SignupModal({isOpen, onClose, onSwitchToLogin, onSignupSuccess}){
     const [formValues, setFormValues] = useState({
         username: "",
         email: "",
@@ -18,12 +18,10 @@ function SignupModal({isOpen, onClose, onSwitchToLogin}){
         password: "",
         confirmPassword: "",
     });
-
-    const handleChange = (field) => (e) => {
-        setFormValues((prev) => ({...prev, [field]: e.target.value}));
-    };
-
-    //Implement submit handler
+    const handleSignupSuccess = () => {
+        onSignupSuccess();
+        onClose();
+    }
 
     if(!isOpen){
         return null;
@@ -31,7 +29,7 @@ function SignupModal({isOpen, onClose, onSwitchToLogin}){
     return (
         <Modal isOpen={isOpen} onClose={onClose} className="signup-modal">
             <SignupModalHeader />
-            <SignupModalBody formValues={formValues} errors = {errors} onChange={handleChange} />
+            <SignupModalBody formValues={formValues} setFormValues={setFormValues} errors = {errors} setErrors={setErrors} onSignupSuccess={handleSignupSuccess}/>
             <SignupModalFooter onClickLogin={onSwitchToLogin}/>
             <hr className="signup-modal-bottom-strip" />
         </Modal>

@@ -5,7 +5,7 @@ import { useState } from "react";
 import LoginModalBody from "./LoginModalBody";
 import LoginModalFooter from "./LoginModalFooter"
 
-function LoginModal({isOpen, onClose, onSwitchToSignup}){
+function LoginModal({isOpen, onClose, onSwitchToSignup, onLoginSuccess}){
     const [formValues, setFormValues] = useState({
         emailOrUsername: "",
         password: "",
@@ -15,11 +15,10 @@ function LoginModal({isOpen, onClose, onSwitchToSignup}){
         password: "",
     });
 
-    const handleChange = (field) => (e) => {
-        setFormValues((prev) => ({...prev, [field]: e.target.value}));
-    };
-
-    //Implement submit handler
+    const handleLoginSuccess = () => {
+        onLoginSuccess();
+        onClose();
+    }
 
     if(!isOpen){
         return null;
@@ -27,7 +26,7 @@ function LoginModal({isOpen, onClose, onSwitchToSignup}){
     return (
         <Modal isOpen={isOpen} onClose={onClose} className="login-modal">
             <LoginModalHeader />
-            <LoginModalBody formValues={formValues} errors = {errors} onChange={handleChange} />
+            <LoginModalBody formValues={formValues} setFormValues = {setFormValues} errors = {errors} setErrors={setErrors} onLoginSuccess={handleLoginSuccess}/>
             <LoginModalFooter OnClickCreateAccount={onSwitchToSignup}/>
             <hr className="login-modal-bottom-strip" />
         </Modal>
