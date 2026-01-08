@@ -5,7 +5,7 @@ import { useState } from "react";
 import LoginModalBody from "./LoginModalBody";
 import LoginModalFooter from "./LoginModalFooter"
 
-function LoginModal({isOpen, onClose}){
+function LoginModal({isOpen, onClose, onSwitchToSignup}){
     const [formValues, setFormValues] = useState({
         emailOrUsername: "",
         password: "",
@@ -28,7 +28,7 @@ function LoginModal({isOpen, onClose}){
         <Modal isOpen={isOpen} onClose={onClose} className="login-modal">
             <LoginModalHeader />
             <LoginModalBody formValues={formValues} errors = {errors} onChange={handleChange} />
-            <LoginModalFooter />
+            <LoginModalFooter OnClickCreateAccount={onSwitchToSignup}/>
             <hr className="login-modal-bottom-strip" />
         </Modal>
     )
