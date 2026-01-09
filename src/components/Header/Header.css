@@ -63,10 +63,24 @@
 
 .header-auth button {
   padding: 10px 15px;
-  border-radius: 10px;
+  border: none;
+  border-radius: 8px;
+  color: white;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.header-auth button:hover {
+  filter: brightness(90%);
+}
+
+.login {
+  background-color: #738485;
+}
+
+.signup {
+  background-color: #26eded;
 }
 
 .header-profile {

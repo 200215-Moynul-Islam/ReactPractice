@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import defaultAvatar from '../../assets/images/default-avatar.png'
 import Container from '../Container/Container'
@@ -8,7 +8,7 @@ import HeaderAuth from './HeaderAuth';
 import HeaderProfile from './HeaderProfile';
 
 function Header() {
-  const isLoggedIn = true;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <header className="header">
@@ -18,7 +18,7 @@ function Header() {
           <HeaderNav />
         </div>
         <div className="header-right">
-          {isLoggedIn ? <HeaderProfile avatarUrl={defaultAvatar} /> : <HeaderAuth />}
+          {isLoggedIn ? <HeaderProfile avatarUrl={defaultAvatar} /> : <HeaderAuth onAuthSuccess={() => setIsLoggedIn(true)}/>}
         </div>
       </Container>
     </header>

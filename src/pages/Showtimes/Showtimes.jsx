@@ -1,10 +1,10 @@
-import PageLayout from "../../components/PageLayout/PageLayout"
+import Container from "../../components/Container/Container";
 
 function Showtimes(){
     return (
-        <PageLayout>
+        <Container>
             <h1>Showtimes page.</h1>
-        </PageLayout>
+        </Container>
     );
 }
 

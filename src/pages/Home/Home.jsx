@@ -1,11 +1,11 @@
 import React from 'react'
-import PageLayout from '../../components/PageLayout/PageLayout'
+import Container from '../../components/Container/Container';
 
 function Home() {
   
 
   return (
-    <PageLayout>
+    <Container>
       <h1>Home page.</h1>
       <h1>Home page.</h1>
       <h1>Home page.</h1>
@@ -51,7 +51,7 @@ function Home() {
       <h1>Home page.</h1>
       <h1>Home page.</h1>
       <h1>Home page.</h1>
-    </PageLayout>
+    </Container>
   );
 }
 

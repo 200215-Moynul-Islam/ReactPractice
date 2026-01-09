@@ -1,11 +1,11 @@
 import React from 'react';
-import PageLayout from '../../components/PageLayout/PageLayout'
+import Container from '../../components/Container/Container';
 
 function Movies() {
   return (
-    <PageLayout>
+    <Container>
       <h1>Movies page.</h1>
-    </PageLayout>
+    </Container>
   );
 }
 
