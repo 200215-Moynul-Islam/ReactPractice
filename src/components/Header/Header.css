@@ -68,11 +68,6 @@
   color: white;
   font-weight: 700;
   white-space: nowrap;
-  cursor: pointer;
-}
-
-.header-auth button:hover {
-  filter: brightness(90%);
 }
 
 .login {
