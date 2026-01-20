@@ -6,6 +6,8 @@ import HeaderLogo from './HeaderLogo';
 import HeaderNav from './HeaderNav';
 import HeaderAuth from './HeaderAuth';
 import HeaderProfile from './HeaderProfile';
+import Popover from '../Popover/Popover';
+import HeaderProfileMenu from './HeaderProfileMenu';
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,7 +20,14 @@ function Header() {
           <HeaderNav />
         </div>
         <div className="header-right">
-          {isLoggedIn ? <HeaderProfile avatarUrl={defaultAvatar} /> : <HeaderAuth onAuthSuccess={() => setIsLoggedIn(true)}/>}
+          {
+            isLoggedIn ?
+            <Popover trigger={<HeaderProfile avatarUrl={defaultAvatar} />}>
+              <HeaderProfileMenu />
+            </Popover>
+            :
+            <HeaderAuth onAuthSuccess={() => setIsLoggedIn(true)}/>
+          }
         </div>
       </Container>
     </header>
