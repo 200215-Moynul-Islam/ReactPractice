@@ -1,0 +1,9 @@
+.popover-container {
+    position: relative;
+}
+
+.popover-content {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+}

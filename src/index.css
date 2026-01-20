@@ -1,3 +1,4 @@
+/* Normalize default css */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,4 +9,12 @@ body {
   font-family: system-ui, sans-serif;
   background-color: #fff;
   color: #111;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(90%);
 }
