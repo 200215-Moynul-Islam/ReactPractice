@@ -22,10 +22,10 @@ function SignupModalBody({formValues, setFormValues, errors, setErrors, onSignup
         if(!result.success){
             const fieldErrors = result.error.flatten().fieldErrors;
             setErrors({
-                username: fieldErrors.username[0] ?? "",
-                email: fieldErrors.email[0] ?? "",
-                password: fieldErrors.password[0] ?? "",
-                confirmPassword: fieldErrors.confirmPassword[0] ?? "",
+                username: fieldErrors?.username?.[0] ?? "",
+                email: fieldErrors?.email?.[0] ?? "",
+                password: fieldErrors?.password?.[0] ?? "",
+                confirmPassword: fieldErrors?.confirmPassword?.[0] ?? "",
             });
             return;
         }

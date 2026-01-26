@@ -21,8 +21,8 @@ function LoginModalBody({formValues, setFormValues, errors, setErrors, onLoginSu
         if(!result.success){
             const fieldErrors = result.error.flatten().fieldErrors;
             setErrors({
-                emailOrUsername: fieldErrors.emailOrUsername[0] ?? "",
-                password: fieldErrors.password[0] ?? "",
+                emailOrUsername: fieldErrors?.emailOrUsername?.[0] ?? "",
+                password: fieldErrors?.password?.[0] ?? "",
             });
             return;
         }
