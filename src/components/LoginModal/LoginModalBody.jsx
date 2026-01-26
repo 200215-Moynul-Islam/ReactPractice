@@ -2,6 +2,8 @@ import "./LoginModal.css";
 import TextField from "../TextField/TextField";
 import { Mail, Eye, EyeOff, LogIn } from "lucide-react";
 import { useState } from "react";
+import { loginSchema } from "../../schemas/auth.js";
+import { VALIDATION_CONFIG } from "../../config/validation.config.js";
 
 function LoginModalBody({formValues, setFormValues, errors, setErrors, onLoginSuccess}){
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -13,13 +15,24 @@ function LoginModalBody({formValues, setFormValues, errors, setErrors, onLoginSu
     const handleSubmit = (e) => {
         // TODO: Update the logic later for login sucess and failure when backend is connected.
         e.preventDefault();
+
+        // Validate form values
+        const result = loginSchema.safeParse(formValues);
+        if(!result.success){
+            const fieldErrors = result.error.flatten().fieldErrors;
+            setErrors({
+                emailOrUsername: fieldErrors.emailOrUsername[0] ?? "",
+                password: fieldErrors.password[0] ?? "",
+            });
+            return;
+        }
         onLoginSuccess();
     }
 
     return (
         <form className="login-modal-body" onSubmit={handleSubmit}>
-            <TextField label="Email Or Username" value={formValues.emailOrUsername} onChange = {handleChange("emailOrUsername")} placeholder="name@example.com" error = {errors.emailOrUsername} rightIcon={<Mail />}/>
-            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={handleChange("password")} placeholder="Password" error={errors.password} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsPasswordVisible((prev) => !prev);}}>{isPasswordVisible ? <EyeOff/> : <Eye />}</button>}/>
+            <TextField label="Email Or Username" value={formValues.emailOrUsername} onChange = {handleChange("emailOrUsername")} placeholder="name@example.com" error = {errors.emailOrUsername} maxLength={VALIDATION_CONFIG.AUTH.EMAIL_OR_USERNAME.MAX_LENGTH} rightIcon={<Mail />}/>
+            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={handleChange("password")} placeholder="Password" error={errors.password} maxLength={VALIDATION_CONFIG.AUTH.PASSWORD.MAX_LENGTH} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsPasswordVisible((prev) => !prev);}}>{isPasswordVisible ? <EyeOff/> : <Eye />}</button>}/>
             <button className="login-button"><LogIn/>Log In</button>
         </form>
     );

@@ -2,6 +2,8 @@ import "./SignupModal.css";
 import TextField from "../TextField/TextField";
 import { Mail, Eye, EyeOff, ArrowRight, User, Lock } from "lucide-react";
 import { useState } from "react";
+import { signupSchema } from "../../schemas/auth";
+import { VALIDATION_CONFIG } from "../../config/validation.config";
 
 function SignupModalBody({formValues, setFormValues, errors, setErrors, onSignupSuccess}){
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -14,15 +16,28 @@ function SignupModalBody({formValues, setFormValues, errors, setErrors, onSignup
     const handleSubmit = (e) => {
         // TODO: Update the logic later for signup sucess and failure when backend is connected.
         e.preventDefault();
+
+        // Validate form values
+        const result = signupSchema.safeParse(formValues);
+        if(!result.success){
+            const fieldErrors = result.error.flatten().fieldErrors;
+            setErrors({
+                username: fieldErrors.username[0] ?? "",
+                email: fieldErrors.email[0] ?? "",
+                password: fieldErrors.password[0] ?? "",
+                confirmPassword: fieldErrors.confirmPassword[0] ?? "",
+            });
+            return;
+        }
         onSignupSuccess();
     }
 
     return (
         <form className="signup-modal-body" onSubmit={handleSubmit}>
-            <TextField label="Username" value={formValues.username} onChange = {handleChange("username")} placeholder= "e.g. Moynul Islam" error = {errors.username} leftIcon={<User />}/>
-            <TextField label="Email" value={formValues.email} onChange = {handleChange("email")} placeholder="name@example.com" error = {errors.email} leftIcon={<Mail />} />
-            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={handleChange("password")} placeholder="Password" error={errors.password} leftIcon={<Lock />} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsPasswordVisible((prev) => !prev);}}>{isPasswordVisible ? <EyeOff /> : <Eye />}</button>}/>
-            <TextField label="Confirm Password" value={formValues.confirmPassword} type={isConfirmPasswordVisible ? "text" : "password"} onChange={handleChange("confirmPassword")} placeholder="Confirm Password" error={errors.password} leftIcon={<Lock />} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsConfirmPasswordVisible((prev) => !prev);}}>{isConfirmPasswordVisible ? <EyeOff/> : <Eye />}</button>}/>
+            <TextField label="Username" value={formValues.username} onChange = {handleChange("username")} placeholder= "e.g. Moynul Islam" error = {errors.username} maxLength={VALIDATION_CONFIG.AUTH.USERNAME.MAX_LENGTH} leftIcon={<User />}/>
+            <TextField label="Email" value={formValues.email} onChange = {handleChange("email")} placeholder="name@example.com" error = {errors.email} maxLength={VALIDATION_CONFIG.AUTH.EMAIL.MAX_LENGTH} leftIcon={<Mail />} />
+            <TextField label="Password" value={formValues.password} type={isPasswordVisible ? "text" : "password"} onChange={handleChange("password")} placeholder="Password" error={errors.password} maxLength={VALIDATION_CONFIG.AUTH.PASSWORD.MAX_LENGTH} leftIcon={<Lock />} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsPasswordVisible((prev) => !prev);}}>{isPasswordVisible ? <EyeOff /> : <Eye />}</button>}/>
+            <TextField label="Confirm Password" value={formValues.confirmPassword} type={isConfirmPasswordVisible ? "text" : "password"} onChange={handleChange("confirmPassword")} placeholder="Confirm Password" error={errors.confirmPassword} maxLength={VALIDATION_CONFIG.AUTH.PASSWORD.MAX_LENGTH} leftIcon={<Lock />} rightIcon={<button className="eye-icon" onClick={(e) => {e.preventDefault(); setIsConfirmPasswordVisible((prev) => !prev);}}>{isConfirmPasswordVisible ? <EyeOff/> : <Eye />}</button>}/>
             <button className="signup-button">Sign Up<ArrowRight/></button>
         </form>
     );
