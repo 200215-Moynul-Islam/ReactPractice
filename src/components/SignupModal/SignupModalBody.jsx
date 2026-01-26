@@ -2,6 +2,7 @@ import "./SignupModal.css";
 import TextField from "../TextField/TextField";
 import { Mail, Eye, EyeOff, ArrowRight, User, Lock } from "lucide-react";
 import { useState } from "react";
+import { signupSchema } from "../../schemas/auth";
 import { VALIDATION_CONFIG } from "../../config/validation.config";
 
 function SignupModalBody({formValues, setFormValues, errors, setErrors, onSignupSuccess}){
@@ -15,6 +16,19 @@ function SignupModalBody({formValues, setFormValues, errors, setErrors, onSignup
     const handleSubmit = (e) => {
         // TODO: Update the logic later for signup sucess and failure when backend is connected.
         e.preventDefault();
+
+        // Validate form values
+        const result = signupSchema.safeParse(formValues);
+        if(!result.success){
+            const fieldErrors = result.error.flatten().fieldErrors;
+            setErrors({
+                username: fieldErrors.username[0] ?? "",
+                email: fieldErrors.email[0] ?? "",
+                password: fieldErrors.password[0] ?? "",
+                confirmPassword: fieldErrors.confirmPassword[0] ?? "",
+            });
+            return;
+        }
         onSignupSuccess();
     }
 
